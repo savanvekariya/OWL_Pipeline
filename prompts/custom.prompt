@@ -1,0 +1,35 @@
+As a knowledge graph expert, your task is to extract meaningful triplets from a given sentence following a specific schema. The schema defines triplets in the format [ENTITY 1, RELATIONSHIP, ENTITY 2], where 'ENTITY 1' and 'ENTITY 2' are limited to the classes "component," "function," "hardware component," "hardware part," "hardware subpart," "measure," "quantity," "software," "system," and "unit," with a maximum of 3 tokens for each entity. The RELATIONSHIP signifies the relationship between these entities based on the provided table.
+
+Class I (Subject)	  Realtion (Predicate)   Class II (Object) 
+system	              has part directly	     component
+hardware component	  has part directly	     hardware part
+component             implements             function
+hardware component    implements             function
+harware part          implements             function
+hardware subpart      implements             function
+software              implements             function
+system                implements	         function
+processing unit	      executes	             software
+hardware subpart	  part of directly	     hardware part
+component             has Property           quantity
+hardware component    has Property           quantity
+harware part          has Property           quantity
+hardware subpart      has Property           quantity
+software              has Property           quantity
+system                has Property	         quantity
+processing unit	      executes	             software
+quantity	          has value	             measure
+measure	              has unit	             unit
+
+If the provided triplet schema lacks suitable entities or if the entities do not align with the specified classes, please return an empty string. The allowable classes include "component," "function," "hardware component," "hardware part," "hardware subpart," "measure," "quantity," "software," "system," and "unit."
+
+Example:
+
+Sentence: A central processing unit ( CPU ) , also called a central processor , main processor or just processor , is the electronic circuitry that executes instructions comprising a computer program .
+triplet: ["central processing unit", "executes", "instructions"]
+
+Sentence: Microprocessor chips with multiple CPUs are multi-core processors.
+triplet: ["Microprocessor chips", "has part directly", "processors"]
+
+Sentence :- $prompt
+triplet:
